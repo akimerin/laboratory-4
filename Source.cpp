@@ -2,15 +2,12 @@
 #include <vector>
 #include <algorithm>
 #include <climits>
-
 using namespace std;
-
-// Структура для представления ребра графа
 struct Edge {
     int src, dest, weight;
 };
 
-// Структура для представления графа
+
 struct Graph {
     int V, E;
     vector<Edge> edges;
@@ -18,12 +15,11 @@ struct Graph {
     Graph(int v, int e) : V(v), E(e) {}
 };
 
-// Функция для сравнения ребер по их весу
 bool compareEdges(const Edge& a, const Edge& b) {
     return a.weight < b.weight;
 }
 
-// Алгоритм Прима-Краскала
+
 void primMST(Graph& graph) {
     vector<Edge> result;
     vector<int> parent(graph.V, -1);
@@ -55,15 +51,14 @@ void primMST(Graph& graph) {
         minWeight += key[i];
     }
 
-    cout << "Minimum spanning tree (Prima-Cruscala):\n"; //Минимальное остовное дерево 
+    cout << "Minimum spanning tree (Prima-Cruscala):\n";
     for (const Edge& edge : result) {
         cout << edge.src << " - " << edge.dest << " : " << edge.weight << "\n";
     }
 
-    cout << "Minimum spanning tree length: " << minWeight << "\n"; //Длина минимального остовного дерева
+    cout << "Minimum spanning tree length: " << minWeight << "\n"; 
 }
 
-// Алгоритм Дейкстры
 void dijkstra(Graph& graph, int start) {
     vector<int> dist(graph.V, INT_MAX);
     dist[start] = 0;
@@ -82,20 +77,20 @@ void dijkstra(Graph& graph, int start) {
         }
     }
 
-    cout << "Shortest distances from the top " << start << " (Dijkstra's algorithm): \n"; //Кратчайшие расстояния от вершины 
+    cout << "Shortest distances from the top " << start << " (Dijkstra's algorithm): \n"; 
     for (int i = 0; i < graph.V; ++i) {
-        cout << "To the top" << i << ": " << dist[i] << "\n"; //До вершины
+        cout << "To the top" << i << ": " << dist[i] << "\n"; 
     }
 }
 
 int main() {
     int V, E;
-    cout << "Enter the number of vertices and edges of the graph: "; //Введите количество вершин и ребер графа
+    cout << "Enter the number of vertices and edges of the graph: "; 
     cin >> V >> E;
 
     Graph graph(V, E);
 
-    cout << "Enter the graph edges (src dest weight):\n"; //Введите ребра графа 
+    cout << "Enter the graph edges (src dest weight):\n"; 
     for (int i = 0; i < E; ++i) {
         int src, dest, weight;
         cin >> src >> dest >> weight;
@@ -107,7 +102,7 @@ int main() {
     primMST(graph);
 
     int startVertex;
-    cout << "Enter the starting vertex for Dijkstra's algorithm:: "; //Введите начальную вершину для алгоритма Дейкстры: 
+    cout << "Enter the starting vertex for Dijkstra's algorithm:: "; 
     cin >> startVertex;
     dijkstra(graph, startVertex);
 
